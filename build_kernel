@@ -51,4 +51,6 @@ sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison fl
 
 # Install more prerequisites. TODO merge this with above prereqs.
 sudo apt-get install qt5-\*-dev
+
+# Change CONFIG_LOCALVERSION to "-v7-s3719834" to change the uname
 (cd linux; make xconfig || exit_script "make xconfig failed!")
