@@ -21,7 +21,28 @@ exit_script () {
 	exit 1
 }
 
-# Clone the neccesary repositories
-# $GIT clone git@github.com:Black-Tomcat/unix-ass-2.git || exit_script "Could not clone assignment repository"
-$GIT clone --depth=1 git@github.com:raspberrypi/linux.git || exit_script "Could not clone linux repository"
+confirm_exit_script () {
+	# A helper function to propmt the user if they wish to exit. This
+	# function can be used in cases where a failed command might not 
+	# necessarily be fatal to the overall script.
+
+	# Read in a response from the user
+	read -r -p "The previous command has just failed ($1). Do you wish to continue? [Y/n] " response
+	
+	# If the repsonse is yes or some variation of such, then continue on.
+	# Otherwise, exit script as appropriate
+	if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+	then
+		echo "Continuing ..."
+	else
+		exit_script "$1"
+	fi
+}
+
+# Clone the neccesary repositories.
+$GIT clone git@github.com:Black-Tomcat/unix-ass-2.git || confirm_exit_script "Could not clone assignment repository"
+$GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script "Could not clone linux repository"
+
+# Install prerequisites.
+sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make     
 
