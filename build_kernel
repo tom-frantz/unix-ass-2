@@ -27,7 +27,7 @@ confirm_exit_script () {
 	# necessarily be fatal to the overall script.
 
 	# Read in a response from the user
-	read -r -p "The previous command has just failed ($1). Do you wish to continue? [Y/n] " response
+	read -r -p "The previous command has just failed (Exit Code: $?; $1). Do you wish to continue? [Y/n] " response
 	
 	# If the repsonse is yes or some variation of such, then continue on.
 	# Otherwise, exit script as appropriate
@@ -46,3 +46,9 @@ $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script
 # Install prerequisites.
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make     
 
+# Create .config file for linux. 
+(cd linux;  KERNEL=kernel7; make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!")
+
+# Install more prerequisites. TODO merge this with above prereqs.
+sudo apt-get install qt5-\*-dev
+(cd linux; make xconfig || exit_script "make xconfig failed!")
