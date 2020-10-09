@@ -1,0 +1,27 @@
+#!/bin/bash
+# build_kernel
+
+# Author Name: Thomas Frantz
+# Date Written: 09/10/2020
+# Date Last Modified: 09/10/2020
+# Purpose Of The Script: To build the kernel with the specifications of the 
+#                        assignment
+
+# Description: This script will execute the following steps in sequence
+#           1. Checkout the required repositories (unix_a2 & linux)
+#           2. Build the kernel with the right .config file
+#           3. Make a bakcup of the kernel files, and move over the new files
+#           4. Install the kernel & drivers
+
+GIT=/usr/bin/git
+
+exit_script () {
+	# A helper function designed to exit with a custom message.
+	echo "build_kernel failed with exit code: $?. $1"
+	exit 1
+}
+
+# Clone the neccesary repositories
+# $GIT clone git@github.com:Black-Tomcat/unix-ass-2.git || exit_script "Could not clone assignment repository"
+$GIT clone --depth=1 git@github.com:raspberrypi/linux.git || exit_script "Could not clone linux repository"
+
