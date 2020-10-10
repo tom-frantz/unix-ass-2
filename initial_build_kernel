@@ -54,7 +54,7 @@ $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make libncurses-dev   
 
 # cd into the linux directory for the rest of the important commands
-cd linux
+cd linux || exit_script "Could not cd into the linux directory. Did you skip the clone when it had errors?"
 
 # Create .config file for linux. 
 make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!"
