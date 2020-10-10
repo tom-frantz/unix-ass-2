@@ -51,7 +51,6 @@ $GIT clone git@github.com:Black-Tomcat/unix-ass-2.git || confirm_exit_script "Co
 $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script "Could not clone linux repository"
 
 # Install prerequisites.
-sudo apt-get update
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make libncurses-dev   
 
 # cd into the linux directory for the rest of the important commands
@@ -69,6 +68,8 @@ make -j4 zImage modules dtbs || exit_script "Compiling the kernel (make -j4 zIma
 # Install the new files in their final destination
 # Clean the old backup files
 rm -r ../backup/
+mkdir ../backup
+mkdir ../backup/boot
 
 # Copy the necessary files to a backup folder
 cp -r /boot/* ../backup/boot/ || exit_script "Could not copy files to backup location!"
