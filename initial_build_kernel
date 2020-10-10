@@ -41,6 +41,7 @@ confirm_exit_script () {
 }
 
 apply_backup_exit () {
+	# Apply the backup boot folder straight back to the kernel and exit.
 	sudo cp ./backup/boot/ /boot/
 	exit_script "There was a fatal error. The backup of the kernel was reinstated. Your pi(e) is safe."
 }
@@ -52,31 +53,34 @@ $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script
 # Install prerequisites.
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make     
 
+# cd into the linux directory for the rest of the important commands
+cd linux
+
 # Create .config file for linux. 
-(cd linux; make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!")
+make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!"
 
 # Install more prerequisites. TODO merge this with above prereqs.
 sudo apt-get install qt5-\*-dev
 
 # Change CONFIG_LOCALVERSION to "-v7-s3719834" to change the uname
-(cd linux; make xconfig || confirm_exit_script "make xconfig failed!")
+make xconfig || confirm_exit_script "make xconfig failed!"
 
 # Compile the kernal source code!
-(cd linux; make -j4 zImage modules dtbs)
+make -j4 zImage modules dtbs || exit_script "Compiling the kernel (make -j4 zImage modules dtbs) failed!"
 
 # Install the new files in their final destination
+# Clean the old backup files
+rm -r ./backup/
+
 # Copy the necessary files to a backup folder
-cp -r /boot/ ./backup/boot/ || exit_script "Could not copy files to backup location!"
+cp -r /boot/* ./backup/boot/ || exit_script "Could not copy files to backup location!"
 
 # Run the final make for linux
-(cd linux; sudo make modules_install || exit_script "make modules_install failed!")
+sudo make modules_install || exit_script "make modules_install failed!"
 
 # Move the linux files from the build to their new locations.
-(
-cd linux; 
-sudo cp arch/arm/boot/dts/*.dtb /boot/ || apply_backup_exit;
-sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/ || apply_backup_exit;
-sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/ || apply_backup_exit;
+sudo cp arch/arm/boot/dts/*.dtb /boot/ || apply_backup_exit
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/ || apply_backup_exit
+sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/ || apply_backup_exit
 sudo cp arch/arm/boot/zImage /boot/$KERNEL.img || apply_backup_exit
-)
 
