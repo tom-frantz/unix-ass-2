@@ -2,7 +2,7 @@
 # build_kernel
 
 # Author Name: Thomas Frantz
-# Date Written: 09/10/2020
+# Date Written: 11/10/2020
 # Date Last Modified: 11/10/2020
 # Purpose Of The Script: To build the kernel with the specifications of the 
 #                        assignment
@@ -53,14 +53,11 @@ $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script
 # Install prerequisites.
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make libncurses-dev   
 
+# Copy the config file to the correct position
+cp unix-ass-2/.config linux/.config || exit_script "Could not copy config over to the linux directory"
+
 # cd into the linux directory for the rest of the important commands
 cd linux
-
-# Create .config file for linux. 
-make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!"
-
-# Change CONFIG_LOCALVERSION to "-v7-s3719834" to change the uname
-make menuconfig || confirm_exit_script "make xconfig failed!"
 
 # Compile the kernal source code!
 make -j4 zImage modules dtbs || exit_script "Compiling the kernel (make -j4 zImage modules dtbs) failed!"
