@@ -42,7 +42,7 @@ confirm_exit_script () {
 
 apply_backup_exit () {
 	# Apply the backup boot folder straight back to the kernel and exit.
-	sudo cp ./backup/boot/ /boot/
+	sudo cp -r ./backup/boot/* /boot/
 	exit_script "There was a fatal error. The backup of the kernel was reinstated. Your pi(e) is safe."
 }
 
