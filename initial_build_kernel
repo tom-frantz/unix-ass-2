@@ -3,7 +3,7 @@
 
 # Author Name: Thomas Frantz
 # Date Written: 09/10/2020
-# Date Last Modified: 09/10/2020
+# Date Last Modified: 10/10/2020
 # Purpose Of The Script: To build the kernel with the specifications of the 
 #                        assignment
 
@@ -62,7 +62,7 @@ sudo apt-get install qt5-\*-dev
 (cd linux; make xconfig || confirm_exit_script "make xconfig failed!")
 
 # Compile the kernal source code!
-# (cd linux; make -j4 zImage modules dtbs)
+(cd linux; make -j4 zImage modules dtbs)
 
 # Install the new files in their final destination
 # Copy the necessary files to a backup folder
