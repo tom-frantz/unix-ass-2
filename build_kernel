@@ -14,6 +14,7 @@
 #           4. Install the kernel & drivers
 
 GIT=/usr/bin/git
+KERNEL=kernel7
 
 exit_script () {
 	# A helper function designed to exit with a custom message.
@@ -39,6 +40,11 @@ confirm_exit_script () {
 	fi
 }
 
+apply_backup_exit () {
+	sudo cp ./backup/boot/ /boot/
+	exit_script "There was a fatal error. The backup of the kernel was reinstated. Your pi(e) is safe."
+}
+
 # Clone the neccesary repositories.
 $GIT clone git@github.com:Black-Tomcat/unix-ass-2.git || confirm_exit_script "Could not clone assignment repository"
 $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script "Could not clone linux repository"
@@ -47,7 +53,7 @@ $GIT clone --depth=1 git@github.com:raspberrypi/linux.git || confirm_exit_script
 sudo apt install raspberrypi-kernel-headers build-essential bc git wget bison flex libssl-dev make     
 
 # Create .config file for linux. 
-(cd linux;  KERNEL=kernel7; make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!")
+(cd linux; make bcm2709_defconfig || exit_script "make bcm2709_defconfig (.config) failed!")
 
 # Install more prerequisites. TODO merge this with above prereqs.
 sudo apt-get install qt5-\*-dev
@@ -56,4 +62,21 @@ sudo apt-get install qt5-\*-dev
 (cd linux; make xconfig || confirm_exit_script "make xconfig failed!")
 
 # Compile the kernal source code!
-(cd linux; make -j4 zImage modules dtbs)
+# (cd linux; make -j4 zImage modules dtbs)
+
+# Install the new files in their final destination
+# Copy the necessary files to a backup folder
+cp -r /boot/ ./backup/boot/ || exit_script "Could not copy files to backup location!"
+
+# Run the final make for linux
+(cd linux; sudo make modules_install || exit_script "make modules_install failed!")
+
+# Move the linux files from the build to their new locations.
+(
+cd linux; 
+sudo cp arch/arm/boot/dts/*.dtb /boot/ || apply_backup_exit;
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/ || apply_backup_exit;
+sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/ || apply_backup_exit;
+sudo cp arch/arm/boot/zImage /boot/$KERNEL.img || apply_backup_exit
+)
+
