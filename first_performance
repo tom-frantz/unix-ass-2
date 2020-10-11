@@ -1,0 +1,41 @@
+#!/bin/bash
+# first_performance
+
+#           Author Name: Thomas Frantz
+#          Date Written: 11/10/2020
+#    Date Last Modified: 11/10/2020
+# Purpose Of The Script: To monitor the performance of the raspberry pi while 
+#                        actively completing another task
+
+# Description: The script executes the following steps every second:
+#              1. Measure the CPU temperature in degrees celsius
+#              2. Extract the value using cut
+#              3. Echo the time since the script has started and the value and
+#              4. Update the seconds counter and sleep. 
+
+readonly VCGENCMD="/usr/bin/vcgencmd"
+readonly CUT="/usr/bin/cut"
+
+trap_user_exit () {
+	# This functions runs when it traps the SIGUSR1 signal
+	exit 0;
+}
+
+# Make sure the trap will happen on SIGUSR1
+trap trap_user_exit SIGUSR1
+
+# A variable to hold how many seconds have passed
+seconds_elapsed=0
+
+while :
+do
+	# Record the temperature and extract it in degreees celsius
+	temp=$($VCGENCMD measure_temp | $CUT -d = -f 2 | $CUT -d \' -f 1 )
+
+	# Echo the output
+	echo -e "$seconds_elapsed\t$temp"
+
+	# Update the counter and sleep 
+	seconds_elapsed=$(($seconds_elapsed + 1))
+	sleep 1s
+done
