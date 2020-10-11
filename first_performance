@@ -33,9 +33,9 @@ do
 	temp=$($VCGENCMD measure_temp | $CUT -d = -f 2 | $CUT -d \' -f 1 )
 
 	# Echo the output
-	echo -e "$seconds_elapsed\t$temp"
+	echo -e "$seconds_elapsed\\t$temp"
 
 	# Update the counter and sleep 
-	seconds_elapsed=$(($seconds_elapsed + 1))
+	seconds_elapsed=$((seconds_elapsed + 1))
 	sleep 1s
 done
