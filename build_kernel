@@ -61,7 +61,8 @@ cd linux || exit_script "Could not cd into the linux directory. Did you skip the
 
 # Compile the kernal source code!
 # Requirement 5: Adding in first performance monitoring script
-nohup ./unix-ass-2/first_performance > kernel_performance_data 2>&1 &
+rm ../kernel_performance_data
+nohup ../unix-ass-2/first_performance > ../kernel_performance_data 2>&1 &
 first_performance_monitoring_script_pid="$!"
 
 #Start the compilation process
