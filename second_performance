@@ -31,7 +31,7 @@ trap_user_exit () {
 trap trap_user_exit SIGUSR2
 
 # Make sure that the file is present with the cpu usage in it.
-$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage) 
+top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage 
 
 while :
 do
@@ -55,3 +55,5 @@ do
 	sudo sh -c "echo none > /sys/class/leds/led0/trigger"
 	sleep "$cpu_usage_off"s
 done	
+
+
