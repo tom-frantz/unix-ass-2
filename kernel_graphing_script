@@ -1,0 +1,20 @@
+#!/bin/bash
+# kernel_graphing_script
+
+#           Author Name: Thomas Frantz
+#          Date Written: 12/10/2020
+#    Date Last Modified: 12/10/2020
+# Purpose Of The Script: Plot the kernel_performance_data into a legible graph
+
+# Description: This script runs a series of commands in gnuplot in order to 
+#              graph the data in kernel_performance_data to an appropriate
+#              grap
+
+
+# execute gnuplot commands to 1) make it a png of dimensions 800x800, 2) save
+# it to 'kernel_performance.png', and 3) plot the graph as specified below
+gnuplot -e "
+set terminal png size 800,800; 
+set output 'kernel_performance.png';
+plot 'kernel_performance_data' using 1:2 title 'CPU Temperature While Compiling The Linux Kernel' linetype 7 linecolor 3 with linespoint
+"
