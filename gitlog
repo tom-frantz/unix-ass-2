@@ -1,3 +1,131 @@
+commit c56f523774e6baee12f0117c3fa16be38647be63
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 13:08:49 2020 +1100
+
+    Kernel graphing script and associated initial graphing result.
+
+commit 26f0c3e473430eb3e78f6b9f4da4ffb934ff4494
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 10:50:14 2020 +1100
+
+    updated kernel performance script and data associated with it
+
+commit d0712d2dbff8240d6d69fc49e443053ce940be53
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 17:43:32 2020 +1100
+
+    bugfixes and shellcheck warning fixes
+
+commit 680e31a13796ea5704b43c5c8894d0e2d4f68399
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 17:34:15 2020 +1100
+
+    Add the first performance monitoring script to the build_kernel script
+
+commit 91851c7b4587df18eabaea02b1f0aa13058f1e30
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 17:28:21 2020 +1100
+
+    Update the first_performance script to be functional
+
+commit eb821e4f75e5262b5d880821b76f7b69657c5a79
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 10:52:24 2020 +1100
+
+    Updated scripts to pass shellcheck warnings
+
+commit 269c95ae65953f622455398ea61333e235c0afd0
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 10:44:27 2020 +1100
+
+    Updated to build scripts
+
+commit 2f21e1c2f4b611a5c71d55682a1cee987e2f812b
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 11 10:07:58 2020 +1100
+
+    final version of initial_build_kernel, and copy file over for build_kernel
+
+commit 28af2cb4405d818542528aae6e31fec8f2c85b2c
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 21:28:43 2020 +1100
+
+    Updates to config to disable camera & finalizing initial_build_script
+
+commit 9f4471a8da4fc835c1e8b026ee8f48d860000d21
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 18:49:21 2020 +1100
+
+    Bugfixes
+
+commit 9f5bf609e524f1f8679fddf48d53c3d620a206cc
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 18:44:24 2020 +1100
+
+    more updates to initial_build_kernel
+
+commit 9ed697a3c53dcabdd8130221480c459980a41fae
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 16:10:16 2020 +1100
+
+    Renamed build script to fit requirement 3 more appropriately
+    
+    This script was used for Requirement 3 - kernel compilation
+
+commit be70143d5feb533506f1608582e6215349d52e0f
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 15:24:07 2020 +1100
+
+    updating build script with last necessary steps for copying files over
+
+commit b0903567732edc5e55fc53642529dac09386a1d1
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sat Oct 10 14:53:58 2020 +1100
+
+    added .config file
+
+commit 17d5327dc8e8218cf87da8bc009a39ef0af50680
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 17:57:31 2020 +1100
+
+    Final steps for compiling the kernel
+
+commit 34455ddce81bd431507de6c727473c8a57ecc053
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 16:37:21 2020 +1100
+
+    updated some comments about xconfig
+
+commit 7623efaf09e949423c376f24486b150625b0c414
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 16:04:06 2020 +1100
+
+    xconfig make added
+
+commit 19cea90e91119452bd485d4b88f523e83ebfb3c2
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 15:15:07 2020 +1100
+
+    Added .gitignore
+
+commit d5f65f78c0d5c607b6026de852605a52ce3dc92f
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 15:08:47 2020 +1100
+
+    Added more helper functions. Added install for prerequsites
+
+commit 52f8c2e3a7ab0da8ffbae0d197e77749b90a8b25
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Fri Oct 9 14:39:11 2020 +1100
+
+    Updated build script
+
+commit 2a306f286117a7051b0c769c1c87895b10595ea1
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Thu Oct 8 09:02:09 2020 +0100
+
+    Added gitlog
+
 commit ed814c0017baf0405da54540ba3794a05a4c3858
 Author: Thomas Frantz <s3719834@student.rmit.edu.au>
 Date:   Thu Oct 8 08:58:01 2020 +0100
