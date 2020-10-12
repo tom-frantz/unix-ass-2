@@ -1,0 +1,51 @@
+BUILD_SCRIPT(1)	User Manuals	BUILD_SCRIPT(1)
+NAME
+	build_script - build the linux kernel
+
+SYNOPSIS
+	build_script
+
+DESCRIPTION
+	build_script downloads the raspberrypi/linux repository and compiles it
+	with a custom config as specified by the .config file in the assignment
+	repository. It starts by downloading both s3719834's unix a2 repository
+	and the linux repository. Next, it copies the .config file out of the 
+	unix a2 repository, and places it accordingly in the linux directory.
+	It begins the process of building the kernel by starting both 
+	performance scripts found in the unix a2 repository (first_performance
+	and second_performance) as background scripts that run while the kernel
+	make command is executing. Once done, it proceeds to kill both programs
+	gracefully and copy the files over to the /boot/ directory of the pi, 
+	creating appropriate backups as needed.
+
+OPTIONS
+	There are no options
+
+FILES
+	./unix-ass-2/.config
+		The config file supplied from the unix a2 repository. This has
+		the required changes to disable camera support and append 
+		`-s3719834` to the kernel's name.
+	./unix-ass-2/first_performance
+		This is the name of the first performance monitoring script.
+	./unix-ass-2/second_performance
+		This is the name of the second performance monitoring script.
+	./kernel_performance_data
+		The standard output of the first_performance script is captured
+		and redirected to this file.
+	./linux/
+		This is the directory where the linux kernel is compiled from.
+	./backup.tar.gz
+		This is tarball that contains the necessary backup of the 
+		kernel compressed in a suitable format.
+
+ENVIRONMENT
+	There are no environment variables set or consumed as such
+
+AUTHOR
+	Thomas Frantz <s3719834@student.rmit.edu.au>
+
+SEE ALSO
+	first_performance(1), second_performance(1)
+
+Linux		Last Change: 12/10/2020

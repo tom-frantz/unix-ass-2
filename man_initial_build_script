@@ -1,0 +1,36 @@
+INITIAL_BUILD_SCRIPT(1)	User Manuals	INITIAL_BUILD_SCRIPT(1)
+NAME
+	initial_build_script - Initial build of the linux kernel
+
+SYNOPSIS
+	initial_build_script
+
+DESCRIPTION
+	This script downloads the raspberrypi/linux repository and compiles it
+	with a custom config as created by the user of this script. It starts by
+	downloading both s3719834's unix a2 repository and the linux repository. 
+	It allows the user to create it's own custom .config file.
+	It begins the process of building the kernel and copies the files over 
+	to the /boot/ directory of the pi, creating appropriate backups as 
+	needed.
+
+OPTIONS
+	There are no options
+
+FILES
+	./linux/
+		This is the directory where the linux kernel is compiled from.
+	./backup.tar.gz
+		This is tarball that contains the necessary backup of the 
+		kernel compressed in a suitable format.
+
+ENVIRONMENT
+	There are no environment variables set or consumed as such
+
+AUTHOR
+	Thomas Frantz <s3719834@student.rmit.edu.au>
+
+SEE ALSO
+	first_performance(1), second_performance(1)
+
+Linux		Last Change: 12/10/2020

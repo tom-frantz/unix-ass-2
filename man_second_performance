@@ -1,0 +1,32 @@
+SECOND_PERFORMANCE(1)	User Manuals	SECOND_PERFORMANCE(1)
+NAME
+	second_performance - Run the LED based performance monitoring program.
+
+SYNOPSIS
+	second_performance
+
+DESCRIPTION
+	This script toggles the green LED on the Raspberry Pi based on the
+	current CPU usage of the Pi. It will leave the LED on for a 
+	percentage of a second based on the current CPU load (0% = 0s, 
+	10% = 0.1s, 100% = 1s) and then turn the light off for the remaining
+	time after such.  
+
+OPTIONS
+	There are no options
+
+FILES
+	./.cpu_usage
+		This file holds the most recent recording of the CPU usage.
+
+ENVIRONMENT
+	There are no environment variables associated with this script.
+
+BUGS
+	There is a delay caused by switching on, which causes the LED to blink
+	even at very high cpu usages.
+
+AUTHOR
+	Thomas Frantz <s3719834@student.rmit.edu.au>
+
+Linux		Last Change: 12/10/2020

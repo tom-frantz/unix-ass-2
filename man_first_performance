@@ -1,0 +1,26 @@
+FIRST_PERFORMANCE(1)	User Manuals	FIRST_PERFORMANCE(1)
+NAME
+	first_performance - Run the temperature monitoring performance script
+
+SYNOPSIS
+	first_performance
+
+DESCRIPTION
+	This script records the CPU's temperature while it runs, and displays
+	them with an associated seconds since the script had started. The 
+	exact format is $seconds\t$temperature, in seconds and degrees celsius
+	respectively. This script exits gracefully upon recieving SIGUSR1.
+
+OPTIONS
+	There are no options.
+
+FILES
+	There are no files associated with this script.
+
+ENVIRONMENT
+	There are no environment variables associated with this script.
+
+AUTHOR
+	Thomas Frantz <s3719834@student.rmit.edu.au>
+
+Linux		Last Change: 12/10/2020

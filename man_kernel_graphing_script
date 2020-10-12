@@ -1,0 +1,28 @@
+KERNEL_GRAPHING_SCRIPT(1)	User Manuals	KERNEL_GRAPHING_SCRIPT(1)
+NAME
+	kernel_graphing_script - Graph the results of kernel_performance_data
+
+SYNOPSIS
+	kernel_graphing_script
+
+DESCRIPTION
+	This script takes the data from kernel_performance_data and plots it
+	using a preset configuration and gnuplot.
+
+OPTIONS
+	There are no options.
+
+FILES
+	./kernel_performance.png
+		This file contains the .png render graph of the data. 
+
+ENVIRONMENT
+	There are no environment variables associated with this script. 
+
+AUTHOR
+	Thomas Frantz <s3719834@student.rmit.edu.au>
+
+SEE ALSO
+	first_performance(1)
+
+Linux		Last Change: 12/10/2020
