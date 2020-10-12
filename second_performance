@@ -1,0 +1,57 @@
+#!/bin/bash
+# second_performance
+
+#           Author Name: Thomas Frantz
+#          Date Written: 12/10/2020
+#    Date Last Modified: 12/10/2020
+# Purpose Of The Script: To monitor the performance of the raspberry pi while 
+#                        actively completing another task
+
+# Description: The script executes the following steps every second:
+#              1. Measure the rate at which the cpu is being used
+#              2. turn on the green light, and sleep for the percentage of a 
+#                 second that it is being used and
+#              3. turn off the green light and sleep the remainder of the
+#                 second 
+
+readonly VCGENCMD="/usr/bin/vcgencmd"
+readonly CUT="/usr/bin/cut"
+
+trap_user_exit () {
+	# This functions runs when it traps the SIGUSR2 signal
+	# Reset the light to normal operation
+	sudo sh -c "echo mmc0 > /sys/class/leds/led0/trigger"
+
+	# Make sure to clean up any unnecessary files
+	rm .cpu_usage
+	exit 0;
+}
+
+# Make sure the trap will happen on SIGUSR2
+trap trap_user_exit SIGUSR2
+
+# Make sure that the file is present with the cpu usage in it.
+$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage) 
+
+while :
+do
+	# Get the current cpu usage
+	# Based off commands present from 
+	# https://stackoverflow.com/a/9229692	
+	$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage) &
+	
+	# Calculate required times for sleeping with the light on/off
+	cpu_usage=$(<.cpu_usage)
+	cpu_usage_on=$(awk "BEGIN {printf \"%.2f\n\", $cpu_usage / 100}")
+	cpu_usage_off=$(awk "BEGIN {printf \"%.2f\n\", 1 - $cpu_usage_on}")
+	
+	# Based off commands from this response
+	# https://raspberrypi.stackexchange.com/a/61955
+
+	# Switch on and sleep for the required amount of time
+	sudo sh -c "echo default-on > /sys/class/leds/led0/trigger"
+	sleep "$cpu_usage_on"s
+	# Switch off and sleep for the required amount of time
+	sudo sh -c "echo none > /sys/class/leds/led0/trigger"
+	sleep "$cpu_usage_off"s
+done	
