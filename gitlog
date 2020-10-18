@@ -1,3 +1,51 @@
+commit ff90192609f0eee84d54a6c6c115a3a1883c4f87
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Sun Oct 18 12:37:33 2020 +1100
+
+    Updated dependencies and tarballing support
+
+commit c3e96d705ef1881922830a34919a541535965052
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 23:39:47 2020 +1100
+
+    added report
+
+commit 8a469e424d1471beb5efa73371e935c2ef3f05f6
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 23:23:25 2020 +1100
+
+    Updated with new data
+
+commit 731ba0cb8c74d916b0170d615754564de111d917
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 23:18:48 2020 +1100
+
+    updates to second_performance script
+
+commit 048be1a004ee46cf0032d02070ab75f5bd6e1149
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 23:09:52 2020 +1100
+
+    adding man pages as well as updated kernel_performance data
+
+commit 57329b5b307148b177c68610c1359f7558ef0d63
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 17:07:44 2020 +1100
+
+    Added second performance monitoring script
+
+commit 9e2904a9a8dd3d89bf79ba1946d21bd023ab9349
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 17:02:50 2020 +1100
+
+    Created the second performance script
+
+commit b09d2a7715fff2ad3fc02378f21bd62aba9e9844
+Author: Thomas Frantz <s3719834@student.rmit.edu.au>
+Date:   Mon Oct 12 14:55:41 2020 +1100
+
+    Updated gitlog
+
 commit c56f523774e6baee12f0117c3fa16be38647be63
 Author: Thomas Frantz <s3719834@student.rmit.edu.au>
 Date:   Mon Oct 12 13:08:49 2020 +1100
