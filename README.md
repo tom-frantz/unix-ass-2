@@ -1,7 +1,9 @@
 # Unix Assignment 2
 
 Student Name: Thomas Frantz
+
 Student Number: s3719834
+
 Raspberry Pi Type: 3
 
 ## Contents
