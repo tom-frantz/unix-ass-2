@@ -13,8 +13,12 @@
 #           3. Make a bakcup of the kernel files, and move over the new files
 #           4. Install the kernel & drivers
 
-GIT=/usr/bin/git
-KERNEL=kernel7
+# A list of dependencies and paths.
+readonly GIT=/usr/bin/git
+readonly MAKE=/usr/bin/make
+readonly NOHUP=/usr/bin/nohup
+readonly TAR=/bin/tar
+readonly KERNEL=kernel7
 
 exit_script () {
 	# A helper function designed to exit with a custom message.
@@ -62,15 +66,15 @@ cd linux || exit_script "Could not cd into the linux directory. Did you skip the
 # Compile the kernal source code!
 # Requirement 5: Adding in first performance monitoring script (Temp Recording)
 rm ../kernel_performance_data
-nohup ../unix-ass-2/first_performance > ../kernel_performance_data 2>&1 &
+$NOHUP ../unix-ass-2/first_performance > ../kernel_performance_data 2>&1 &
 first_performance_monitoring_script_pid="$!"
 
 # Requirement 6: Adding in the second performance monitoring script (LED)
-nohup ../unix-ass-2/second_performance > /dev/null 2>&1 &
+$NOHUP ../unix-ass-2/second_performance > /dev/null 2>&1 &
 second_performance_monitoring_script_pid="$!"
 
 #Start the compilation process
-make -j4 zImage modules dtbs || exit_script "Compiling the kernel (make -j4 zImage modules dtbs) failed!"
+$MAKE -j4 zImage modules dtbs || exit_script "Compiling the kernel (make -j4 zImage modules dtbs) failed!"
 
 # Gracefully exit the performance monitoring scripts
 kill -SIGUSR1 "$first_performance_monitoring_script_pid"
@@ -84,9 +88,10 @@ mkdir ../backup/boot
 
 # Copy the necessary files to a backup folder
 cp -r /boot/* ../backup/boot/ || exit_script "Could not copy files to backup location!"
+$TAR cvzf backup.tar.gz ../backup
 
 # Run the final make for linux
-sudo make modules_install || exit_script "make modules_install failed!"
+sudo $MAKE modules_install || exit_script "make modules_install failed!"
 
 # Move the linux files from the build to their new locations.
 sudo cp arch/arm/boot/dts/*.dtb /boot/ || apply_backup_exit

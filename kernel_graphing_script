@@ -10,6 +10,8 @@
 #              graph the data in kernel_performance_data to an appropriate
 #              grap
 
+# Dependencies
+readonly GNUPLOT="/usr/bin/gnuplot"
 
 # execute gnuplot commands to 1) make it a png of dimensions 800x800, 2) save
 # it to 'kernel_performance.png', and 3) plot the graph as specified below

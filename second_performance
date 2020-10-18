@@ -16,6 +16,10 @@
 
 readonly VCGENCMD="/usr/bin/vcgencmd"
 readonly CUT="/usr/bin/cut"
+readonly AWK="/usr/bin/awk"
+readonly GREP="/bin/grep"
+readonly SED="/bin/sed"
+
 
 trap_user_exit () {
 	# This functions runs when it traps the SIGUSR2 signal
@@ -31,19 +35,19 @@ trap_user_exit () {
 trap trap_user_exit SIGUSR2
 
 # Make sure that the file is present with the cpu usage in it.
-top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage 
+top -bn1 | $GREP "Cpu(s)" | $SED "s/.*, *\([0-9.]*\)%* id.*/\1/" | $AWK '{print 100 - $1}' > .cpu_usage 
 
 while :
 do
 	# Get the current cpu usage
 	# Based off commands present from 
 	# https://stackoverflow.com/a/9229692	
-	$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1}' > .cpu_usage) &
+	$(top -bn1 | $GREP "Cpu(s)" | $SED "s/.*, *\([0-9.]*\)%* id.*/\1/" | $AWK '{print 100 - $1}' > .cpu_usage) &
 	
 	# Calculate required times for sleeping with the light on/off
 	cpu_usage=$(<.cpu_usage)
-	cpu_usage_on=$(awk "BEGIN {printf \"%.2f\n\", $cpu_usage / 100}")
-	cpu_usage_off=$(awk "BEGIN {printf \"%.2f\n\", 1 - $cpu_usage_on}")
+	cpu_usage_on=$($AWK "BEGIN {printf \"%.2f\n\", $cpu_usage / 100}")
+	cpu_usage_off=$($AWK "BEGIN {printf \"%.2f\n\", 1 - $cpu_usage_on}")
 	
 	# Based off commands from this response
 	# https://raspberrypi.stackexchange.com/a/61955
